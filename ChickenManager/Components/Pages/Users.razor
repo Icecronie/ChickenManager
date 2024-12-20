@@ -2,11 +2,18 @@
 
 @using ChickenManager.Models;
 @using DataAccess;
+@using Radzen.Blazor;
 
 @inject ISqlDataAccess _data
 @inject IConfiguration _config
 
 <h3>Users</h3>
+
+
+
+@* <RadzenCard>
+
+</RadzenCard> *@
 
 @if(userList == null) {
     <p><em>Loading...</em></p>
@@ -17,6 +24,34 @@ else {
 
     @foreach (var user in userList)
     {
+        <RadzenCard class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
+            <RadzenStack Gap="1rem" class="rz-p-4">
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Chicken Name</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@user.FirstName @user.LastName</b></RadzenText>
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Chicken Creator Name</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@user.CreatorName</b></RadzenText>
+                  
+
+                </RadzenStack>
+            </RadzenStack>
+            <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                <RadzenText TextStyle="TextStyle.H6" class="rz-color-on-primary-light"><strong>Contact Information</strong></RadzenText>
+                <RadzenRow RowGap="0">
+                    <RadzenColumn SizeSM="6">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Email</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1" class="rz-color-on-primary-light"><b>@user.Email</b></RadzenText>
+                    </RadzenColumn>
+                    <RadzenColumn SizeSM="6">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Phone</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1" class="rz-color-on-primary-light"><b>@user.PhoneNumber</b></RadzenText>
+                    </RadzenColumn>
+                </RadzenRow>
+            </RadzenCard>
+        </RadzenCard>
+
+
+
         <p>@user.FirstName</p>
         <p>@user.LastName</p>
         <p>@user.CreatorName</p>

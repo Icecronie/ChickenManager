@@ -1,5 +1,6 @@
 using ChickenManager.Components;
 using DataAccess;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors =
 //DI
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 
+//radzen
+builder.Services.AddRadzenComponents();
+builder.Services.AddScoped<Radzen.DialogService>();
+builder.Services.AddScoped<Radzen.NotificationService>();
+builder.Services.AddScoped<Radzen.ThemeService>();
 
 var app = builder.Build();
 
