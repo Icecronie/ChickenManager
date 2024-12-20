@@ -1,0 +1,28 @@
+﻿@page "/Users"
+
+@using ChickenManager.Models;
+@using DataAccess;
+
+@inject ISqlDataAccess _data
+@inject IConfiguration _config
+
+<h3>Users</h3>
+
+@if(userList == null) {
+    <p><em>Loading...</em></p>
+}
+else {
+
+    <p>@message</p>
+
+    @foreach (var user in userList)
+    {
+        <p>@user.FirstName</p>
+        <p>@user.LastName</p>
+        <p>@user.CreatorName</p>
+    }
+}
+
+<div>
+    <button @onclick=GetUsers>Click here to refresh</button>
+</div>
