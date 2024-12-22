@@ -9,17 +9,10 @@
 
 <h3>Users</h3>
 
-
-
-@* <RadzenCard>
-
-</RadzenCard> *@
-
 @if(userList == null) {
     <p><em>Loading...</em></p>
 }
 else {
-
     <p>@message</p>
 
     @foreach (var user in userList)
@@ -31,8 +24,6 @@ else {
                     <RadzenText TextStyle="TextStyle.Body1"><b>@user.FirstName @user.LastName</b></RadzenText>
                     <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Chicken Creator Name</RadzenText>
                     <RadzenText TextStyle="TextStyle.Body1"><b>@user.CreatorName</b></RadzenText>
-                  
-
                 </RadzenStack>
             </RadzenStack>
             <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
@@ -49,15 +40,9 @@ else {
                 </RadzenRow>
             </RadzenCard>
         </RadzenCard>
-
-
-
-        <p>@user.FirstName</p>
-        <p>@user.LastName</p>
-        <p>@user.CreatorName</p>
     }
 }
 
 <div>
-    <button @onclick=GetUsers>Click here to refresh</button>
+    <RadzenButton @onclick=GetUsers>Click here to refresh</RadzenButton>
 </div>

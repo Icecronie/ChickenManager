@@ -15,5 +15,15 @@ namespace DataAccess
                 return rows.ToList();
             }
         }
+
+        public async Task<int> SaveData<T, U>(string sql, U parameters, string connectionString)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var rows = await connection.ExecuteAsync(sql, parameters);
+
+                return rows;
+            }
+        }
     }
 }

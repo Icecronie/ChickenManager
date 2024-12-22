@@ -1,0 +1,137 @@
+﻿@page "/RegisterUser"
+
+@inject ISqlDataAccess _data
+@inject IConfiguration _config
+@inject NavigationManager Navigationmanager
+
+@using ChickenManager.Models
+@using DataAccess
+@using Radzen.Blazor;
+
+
+<h3>Create New Chicken</h3>
+
+<div class="rz-p-0 rz-p-md-12">
+    <RadzenTemplateForm TItem="User" Data=@user Submit=@CreateUser>
+        <RadzenRow Gap="1rem">
+            <RadzenColumn Size="12" SizeSM="6">
+                <RadzenStack>
+                    <RadzenFormField Text="First Name" Variant="@variant">
+                        <RadzenTextBox @bind-Value="@user.FirstName" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Last Name" Variant="@variant">
+                        <RadzenTextBox @bind-Value=@user.LastName />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Chicken Name" Variant="@variant">
+                        <RadzenTextBox @bind-Value=@user.CreatorName/>
+                    </RadzenFormField>
+                    <RadzenFormField Text="Email" Variant="@variant">
+                        <RadzenTextBox @bind-Value=@user.Email />
+                        @* <RadzenEmailValidator Component="Email" Text="Provide an email address"/> *@
+                    </RadzenFormField>
+                    <RadzenFormField Text="Phone Number" Variant="@variant">
+                        <RadzenTextBox @bind-Value=@user.PhoneNumber/>
+                    </RadzenFormField>
+                    <RadzenFormField Text="Birthday" Variant="@variant">
+                        <RadzenDatePicker @bind-Value=@user.BirthDay/>
+                    </RadzenFormField>
+
+
+
+                    @*  <RadzenFormField Text="RadzenNumeric" Variant="@variant">
+                    <RadzenNumeric @bind-Value="@intValue" />
+                </RadzenFormField>
+                <RadzenFormField Text="RadzenPassword" Variant="@variant">
+                    <RadzenPassword @bind-Value="@value" />
+                </RadzenFormField>
+                <RadzenFormField Text="RadzenDropDown" Variant="@variant">
+                    <RadzenDropDown Data=@companyNames @bind-Value="@dropDownValue" />
+                </RadzenFormField>
+                <RadzenFormField Text="RadzenDropDownDataGrid" Variant="@variant">
+                    <RadzenDropDownDataGrid Data=@companyNames @bind-Value="@dropDownDataGridValue" />
+                </RadzenFormField> *@
+                <RadzenButton ButtonType="ButtonType.Submit">Create Chicken</RadzenButton>
+                </RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</div>
+
+
+@if (user == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+   
+}
+
+@code {
+    public class Order
+    {
+        public int CardId { get; set; }
+        public string CardNr { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public string CardHolder { get; set; }
+        public string Name { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public int Country { get; set; }
+        public int StoreId { get; set; }
+        public string Warehouse { get; set; }
+        public string Region { get; set; }
+        public string System { get; set; }
+        public int TransId { get; set; }
+        public string Register { get; set; }
+        public string Clerk { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Tax { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime ShipDate { get; set; }
+    }
+
+    public class CreditCard
+    {
+        public int CardId { get; set; }
+        public string CardNr { get; set; }
+    }
+
+    public class Country
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    Order order = new Order()
+        {
+            ExpiryDate = DateTime.Parse("10/10/2022"),
+            OrderDate = DateTime.Now,
+            ShipDate = DateTime.Now
+        };
+
+    List<CreditCard> cards = new List<CreditCard>()
+{
+        new CreditCard() { CardId = 1, CardNr = "5555555555554444" },
+        new CreditCard() { CardId = 2, CardNr = "4012888888881881" }
+    };
+
+    List<Country> countries = new List<Country>()
+{
+        new Country() { Id = 1, Name = "USA" },
+        new Country() { Id = 2, Name = "Germany" }
+    };
+
+    void Submit(User arg)
+    {
+        //
+    }
+
+    void Cancel()
+    {
+        //
+    }
+}
