@@ -1,10 +1,8 @@
-﻿using ChickenManager.Models;
-
-namespace ChickenManager.Components.Pages
+﻿namespace ChickenManager.Components.Pages
 {
     public partial class Users
     {
-        IEnumerable<User> userList;
+        IEnumerable<Models.User> userList;
         string message;
 
         //This right now is working
@@ -17,7 +15,7 @@ namespace ChickenManager.Components.Pages
         {
             string sql = "select * from [User]";
             message = "Loading";
-            userList = await _data.LoadData<User, dynamic>(sql, new { }, _config.GetConnectionString("Default"));
+            userList = await _data.LoadData<Models.User, dynamic>(sql, new { }, _config.GetConnectionString("Default"));
             message = "Loading Complete";
         }
     }

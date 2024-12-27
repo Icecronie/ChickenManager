@@ -1,4 +1,4 @@
-﻿@page "/RegisterUser"
+﻿@page "/User/RegisterUser"
 
 @inject ISqlDataAccess _data
 @inject IConfiguration _config
@@ -8,55 +8,52 @@
 @using DataAccess
 @using Radzen.Blazor;
 
-
-<h3>Create New Chicken</h3>
+<h3>Register User</h3>
 
 <div class="rz-p-0 rz-p-md-12">
-    <RadzenTemplateForm TItem="User" Data=@user Submit=@CreateUser>
+    <RadzenTemplateForm TItem="Models.User" Data=@user Submit=@CreateUser>
         <RadzenRow Gap="1rem">
             <RadzenColumn Size="12" SizeSM="6">
                 <RadzenStack>
                     <RadzenFormField Text="First Name" Variant="@variant">
-                        <RadzenTextBox @bind-Value="@user.FirstName" />
+                        <RadzenTextBox @bind-Value="@user.FirstName" Name="firstname"/>
+                        <RadzenRequiredValidator Component="firstname" Text="First Name is required" Popup="@popup"/>
+                        <RadzenLengthValidator Component="firstname" Min="3" Text="First Name needs to be at least 3 characters" Popup=@popup />
                     </RadzenFormField>
                     <RadzenFormField Text="Last Name" Variant="@variant">
-                        <RadzenTextBox @bind-Value=@user.LastName />
+                        <RadzenTextBox @bind-Value=@user.LastName Name="lastname"/>
+                        <RadzenRequiredValidator Component="lastname" Text="Last Name is required" Popup="@popup" />
                     </RadzenFormField>
-                    <RadzenFormField Text="Chicken Name" Variant="@variant">
-                        <RadzenTextBox @bind-Value=@user.CreatorName/>
+                    <RadzenFormField Text="Username" Variant="@variant">
+                        <RadzenTextBox @bind-Value=@user.CreatorName Name="username"/>
+                        <RadzenRequiredValidator Component="username" Text="Username is required" Popup="@popup" />
+                        <RadzenLengthValidator Component="username" Min="3" Text="Username needs to be at least 3 characters" Popup=@popup />
                     </RadzenFormField>
                     <RadzenFormField Text="Email" Variant="@variant">
-                        <RadzenTextBox @bind-Value=@user.Email />
-                        @* <RadzenEmailValidator Component="Email" Text="Provide an email address"/> *@
+                        <RadzenTextBox @bind-Value=@user.Email Name="Email" />
+                        <RadzenRequiredValidator Component="Email" Text="Email is required" Popup="@popup" />
+                        <RadzenEmailValidator Component="Email" Text="Provide a valid email address" Popup="@popup" />
                     </RadzenFormField>
                     <RadzenFormField Text="Phone Number" Variant="@variant">
-                        <RadzenTextBox @bind-Value=@user.PhoneNumber/>
+                        <RadzenTextBox @bind-Value=@user.PhoneNumber Name="phonenumber"/>
                     </RadzenFormField>
-                    <RadzenFormField Text="Birthday" Variant="@variant">
-                        <RadzenDatePicker @bind-Value=@user.BirthDay/>
+                    <RadzenFormField Text="Password" Variant="@variant">
+                        <RadzenPassword Placeholder="Enter password" Text="Password" @bind-Value="@user.Password" Name="password" />
+                        <RadzenRequiredValidator Component="password" Text="Password is required" Popup="@popup" />
+                        <RadzenLengthValidator Component="password" Min="8" Text="Password must be at least 8 characters" Popup=@popup />
                     </RadzenFormField>
-
-
-
-                    @*  <RadzenFormField Text="RadzenNumeric" Variant="@variant">
-                    <RadzenNumeric @bind-Value="@intValue" />
-                </RadzenFormField>
-                <RadzenFormField Text="RadzenPassword" Variant="@variant">
-                    <RadzenPassword @bind-Value="@value" />
-                </RadzenFormField>
-                <RadzenFormField Text="RadzenDropDown" Variant="@variant">
-                    <RadzenDropDown Data=@companyNames @bind-Value="@dropDownValue" />
-                </RadzenFormField>
-                <RadzenFormField Text="RadzenDropDownDataGrid" Variant="@variant">
-                    <RadzenDropDownDataGrid Data=@companyNames @bind-Value="@dropDownDataGridValue" />
-                </RadzenFormField> *@
+                    <RadzenFormField Text="Confirm Password" Variant="@variant">
+                        <RadzenPassword  @bind-Value="@user.ConfirmPassword" Name="confirmpassword"/>
+                        <RadzenRequiredValidator Component="confirmpassword" Text="Confirm Password is required" Popup="@popup" />
+                        <RadzenLengthValidator Component="confirmpassword" Min="8" Text="Confirm Password must be at least 8 characters" Popup=@popup />
+                        <RadzenCompareValidator Visible=@(!string.IsNullOrEmpty(user.Password)) Value=@user.Password Component="confirmpassword" Text="Passwords must match" Popup=@popup />
+                    </RadzenFormField>
                 <RadzenButton ButtonType="ButtonType.Submit">Create Chicken</RadzenButton>
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
     </RadzenTemplateForm>
 </div>
-
 
 @if (user == null)
 {
@@ -125,7 +122,7 @@ else
         new Country() { Id = 2, Name = "Germany" }
     };
 
-    void Submit(User arg)
+    void Submit(Models.User arg)
     {
         //
     }

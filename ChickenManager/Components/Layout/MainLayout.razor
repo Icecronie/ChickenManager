@@ -7,7 +7,18 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+
+            @*todo add if authed, view profile, else login link*@
+            @if(1==1){
+                <NavLink class="nav-link" href="/User/Login" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Login
+                </NavLink>
+            }
+            else{
+
+            }
+
+            
         </div>
 
         <article class="content px-4">
