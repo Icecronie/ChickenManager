@@ -1,4 +1,15 @@
 ﻿@page "/User/Login"
 
+@inject NavigationManager Navigationmanager
 
 <h3>Login</h3>
+
+<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
+    <RadzenTemplateForm TItem="@Models.User" Data="@User">
+        <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@User.Email Password=@User.Password
+                    AllowRememberMe="true" RememberMe="@rememberMe"
+                    Login=@(args => OnLogin(args, "Login with default values"))
+                    ResetPassword="@Reset"
+                    Register="@OnRegister" />
+    </RadzenTemplateForm>
+</RadzenCard>

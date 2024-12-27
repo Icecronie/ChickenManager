@@ -8,17 +8,18 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="users">
-                <span class="bi bi-people mb-4" aria-hidden="true"></span> Chickens
-            </NavLink>
-        </div>
         @*todo add auth check to show/hide this*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="user/registeruser">
                 <span class="bi bi-people mb-4" aria-hidden="true"></span> New User
             </NavLink>
         </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="users">
+                <span class="bi bi-people mb-4" aria-hidden="true"></span> Chickens
+            </NavLink>
+        </div>
+       
     </nav>
 </div>
 

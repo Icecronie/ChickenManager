@@ -48,7 +48,7 @@
                         <RadzenLengthValidator Component="confirmpassword" Min="8" Text="Confirm Password must be at least 8 characters" Popup=@popup />
                         <RadzenCompareValidator Visible=@(!string.IsNullOrEmpty(user.Password)) Value=@user.Password Component="confirmpassword" Text="Passwords must match" Popup=@popup />
                     </RadzenFormField>
-                <RadzenButton ButtonType="ButtonType.Submit">Create Chicken</RadzenButton>
+                <RadzenButton ButtonType="ButtonType.Submit">Register User</RadzenButton>
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
