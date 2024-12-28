@@ -1,0 +1,53 @@
+﻿@page "/Chicken/AddChicken"
+
+@using DataAccess
+@using ChickenManager.Repositories
+
+@inject NavigationManager NavigationManager
+@inject ISqlDataAccess _data
+@inject IConfiguration _config
+@inject ILookupRepository _lookupRepository
+
+
+<h3>AddChicken</h3>
+
+<div class="rz-p-0 rz-p-md-12">
+    <RadzenTemplateForm TItem="Models.Chicken" Data=@Chicken Submit=@CreateChicken>
+        <RadzenRow Gap="1rem">
+            <RadzenColumn Size="12" SizeSM="6">
+                <RadzenStack>
+                    <RadzenFormField Text="Name" Variant="@variant">
+                        <RadzenTextBox @bind-Value="@Chicken.Name" Name="name" />
+                        <RadzenRequiredValidator Component="name" Text="Name is required" Popup="@popup" />
+                        <RadzenLengthValidator Component="name" Min="2" Text="Name needs to be at least 2 characters" Popup=@popup />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Breed" Variant="@variant">
+                        <RadzenDropDown TValue="int" @bind-Value=Chicken.Breed.Id  Data=@breeds TextProperty="@nameof(Models.Breed.Text)" ValueProperty="@nameof(Models.Breed.Id)" Name="breed" />
+                        <RadzenRequiredValidator DefaultValue="0" Component="breed" Text="Breed is required" Popup="@popup" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Gender" Variant="@variant">
+                        <RadzenDropDown TValue="int" @bind-Value=Chicken.Gender.Id Data=@genders TextProperty="@nameof(Models.Gender.Text)" ValueProperty="@nameof(Models.Gender.Id)" Name="gender" />
+                        <RadzenRequiredValidator DefaultValue="0" Component="gender" Text="Gender is required" Popup="@popup" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Color" Variant="@variant">
+                        <RadzenDropDown TValue="int" @bind-Value=Chicken.Color.Id Data=@colors TextProperty="@nameof(Models.Color.Text)" ValueProperty="@nameof(Models.Color.Id)" Name="color" />
+                        <RadzenRequiredValidator DefaultValue="0" Component="color" Text="Color is required" Popup="@popup" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Age" Variant="@variant">
+                        <RadzenNumeric @bind-Value=Chicken.Age  Name="age" Min="1" ShowUpDown="false"/>
+                        <RadzenNumericRangeValidator Component="age" Min="1" Text="Age must be at least 1" Popup=@popup />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Lays Eggs">
+                        <Start>
+                            <RadzenCheckBox @bind-Value=@Chicken.LaysEggs Name="layseggs" Class="rz-my-4" />
+                        </Start>
+                        <ChildContent>
+                            <RadzenLabel Text="" Component="layseggs" Class="rz-mx-4" />
+                        </ChildContent>
+                    </RadzenFormField>
+                    <RadzenButton ButtonType="ButtonType.Submit">Register Chicken</RadzenButton>
+                </RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</div>

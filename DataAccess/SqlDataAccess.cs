@@ -25,5 +25,15 @@ namespace DataAccess
                 return rows;
             }
         }
+
+        public async Task<T> LoadSingle<T, U>(string sql, U parameters, string connectionString)
+        {
+            using (IDbConnection conn = new SqlConnection(connectionString))
+            {
+                var row = await conn.QuerySingleAsync<T>(sql, parameters);
+
+                return row;
+            }
+        }
     }
 }

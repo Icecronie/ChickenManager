@@ -2,6 +2,13 @@
 {
     public class Chicken
     {
+        public Chicken()
+        {
+            Breed = new Breed();
+            Gender = new Gender();
+            Color = new Color();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public Breed Breed { get; set; }

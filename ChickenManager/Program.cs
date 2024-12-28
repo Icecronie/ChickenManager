@@ -1,4 +1,5 @@
 using ChickenManager.Components;
+using ChickenManager.Repositories;
 using DataAccess;
 using Radzen;
 
@@ -12,6 +13,7 @@ builder.Services.AddServerSideBlazor().AddCircuitOptions(x => x.DetailedErrors =
 
 //DI
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddSingleton<ILookupRepository, LookupRepository>();
 
 //radzen
 builder.Services.AddRadzenComponents();
