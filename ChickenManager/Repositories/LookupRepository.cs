@@ -50,5 +50,16 @@ namespace ChickenManager.Repositories
 
             return await _data.SaveData<Chicken, dynamic>(sql,parameters,_config.GetConnectionString("Default"));
         }
+
+        public async Task<List<Models.Chicken>> LoadChickens<Chicken>(ISqlDataAccess _data, IConfiguration _config, int userId)
+        {
+            string sql = "exec LoadChickens @userId";
+            var param = new
+            {
+                userId
+            };
+
+            return await _data.LoadData<Models.Chicken, dynamic>(sql, param, _config.GetConnectionString("Default"));
+        }
     }
 }

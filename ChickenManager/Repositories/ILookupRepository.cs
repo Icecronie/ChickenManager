@@ -10,6 +10,6 @@ namespace ChickenManager.Repositories
         Task<List<Color>> LoadColors<T>(ISqlDataAccess _data, IConfiguration _config);
         Task<User> LoadUser<T>(ISqlDataAccess _data, IConfiguration _config);
         Task<int> CreateChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, Models.Chicken chicken);
-
+        Task<List<Models.Chicken>> LoadChickens<Chicken>(ISqlDataAccess _data, IConfiguration _config, int userId);
     }
 }

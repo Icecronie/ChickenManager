@@ -1,0 +1,34 @@
+﻿@page "/Chicken/Search"
+
+@using DataAccess
+@using ChickenManager.Repositories
+
+@inject NavigationManager NavigationManager
+@inject ISqlDataAccess _data
+@inject IConfiguration _config
+@inject ILookupRepository _lookupRepository
+@inject DialogService DialogService
+
+<h3>My Chickens</h3>
+
+
+<RadzenDataGrid 
+    AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="15" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@userChickens" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" GridLines="Radzen.DataGridGridLines.Both">
+    <Columns>
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.Id)" Title="Actions" Width="150px">
+            <Template Context="data">
+                <RadzenButton Text="Edit" Variant="Variant.Flat" Click="@OpenOrder" />
+                <RadzenButton Text="Delete" Variant="Variant.Flat" Click=@Delete />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.Name)" Title="Chicken Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.BreedName)" Title="Breed" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.GenderName)" Title="Gender" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.ColorName)" Title="Color" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.Age)" Title="Age" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(Models.Chicken.LaysEggs)" Title="Lays Eggs" Width="160px" />
+    </Columns>
+</RadzenDataGrid>
+
+<RadzenButton Click="@Refresh" Text="Refresh" />
