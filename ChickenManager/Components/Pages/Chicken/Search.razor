@@ -11,6 +11,7 @@
 
 <h3>My Chickens</h3>
 
+<RadzenDialog />
 
 <RadzenDataGrid 
     AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="15" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
@@ -19,7 +20,7 @@
         <RadzenDataGridColumn Property="@nameof(Models.Chicken.Id)" Title="Actions" Width="150px">
             <Template Context="data">
                 <RadzenButton Text="Edit" Variant="Variant.Flat" Click="@OpenOrder" />
-                <RadzenButton Text="Delete" Variant="Variant.Flat" Click=@Delete />
+                <RadzenButton Text="Delete" Variant="Variant.Flat" Click="@(()=>Delete(data))" />
             </Template>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn Property="@nameof(Models.Chicken.Name)" Title="Chicken Name" Frozen="true" Width="160px" />

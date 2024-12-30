@@ -61,5 +61,17 @@ namespace ChickenManager.Repositories
 
             return await _data.LoadData<Models.Chicken, dynamic>(sql, param, _config.GetConnectionString("Default"));
         }
+
+        public async Task<int> DeleteChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, int chickenId)
+        {
+            string sql = "exec DeleteChicken @chickenId";
+
+            var parameters = new
+            {
+                chickenId
+            };
+
+            return await _data.SaveData<Chicken, dynamic>(sql, parameters, _config.GetConnectionString("Default"));
+        }
     }
 }

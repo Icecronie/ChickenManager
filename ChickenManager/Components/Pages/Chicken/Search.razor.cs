@@ -22,21 +22,24 @@ namespace ChickenManager.Components.Pages.Chicken
             NavigationManager.Refresh(true);
         }
 
-        void Delete(EventArgs args)
+        public async void Delete(Models.Chicken chicken)
         {
-            string name = "bobbly";
-
-            string message = $"Delete chicken {name}";
-            string title = "Remove chicken from account?";
+            string message = $"Delete chicken {chicken.Name}?";
             var options = new ConfirmOptions
             {
                 OkButtonText = "Yes",
-                CancelButtonText = "No"
+                CancelButtonText = "No",
+                CloseDialogOnOverlayClick = true
             };
 
-            DialogService.Confirm(message, title, options);
+            var confirm = await DialogService.Confirm("", message, options);
 
-            //Refresh();
+            if (confirm.Value)
+            {
+                await _lookupRepository.DeleteChicken<Models.Chicken>(_data,_config,chicken.Id);
+
+                Refresh();
+            }
         }
 
         public async Task OpenOrder(EventArgs args)
