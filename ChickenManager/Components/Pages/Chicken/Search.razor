@@ -19,7 +19,7 @@
     <Columns>
         <RadzenDataGridColumn Property="@nameof(Models.Chicken.Id)" Title="Actions" Width="150px">
             <Template Context="data">
-                <RadzenButton Text="Edit" Variant="Variant.Flat" Click="@OpenOrder" />
+                <RadzenButton Text="Edit" Variant="Variant.Flat" Click="@(()=>Edit(data))" />
                 <RadzenButton Text="Delete" Variant="Variant.Flat" Click="@(()=>Delete(data))" />
             </Template>
         </RadzenDataGridColumn>
@@ -31,5 +31,3 @@
         <RadzenDataGridColumn Property="@nameof(Models.Chicken.LaysEggs)" Title="Lays Eggs" Width="160px" />
     </Columns>
 </RadzenDataGrid>
-
-<RadzenButton Click="@Refresh" Text="Refresh" />

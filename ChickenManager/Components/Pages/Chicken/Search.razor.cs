@@ -1,4 +1,5 @@
-﻿using Radzen;
+﻿using ChickenManager.Models;
+using Radzen;
 
 namespace ChickenManager.Components.Pages.Chicken
 {
@@ -8,12 +9,24 @@ namespace ChickenManager.Components.Pages.Chicken
         Models.User user = new Models.User();
         List<Models.Chicken> chickens = new List<Models.Chicken>();
         List<Models.Chicken> userChickens = new List<Models.Chicken>();
+        
         protected override async Task OnInitializedAsync()
         {
             //for testing, since I don't have login right now just grabbing a person
             user = await _lookupRepository.LoadUser<Models.User>(_data, _config);
 
             userChickens = await _lookupRepository.LoadChickens<Models.Chicken>(_data, _config, user.Id);
+            List<Breed> breeds = await _lookupRepository.LoadBreeds<Breed>(_data, _config);
+            List<Gender> genders = await _lookupRepository.LoadGenders<Gender>(_data, _config);
+            List<Color> colors = await _lookupRepository.LoadColors<Color>(_data, _config);
+
+            foreach (var item in userChickens)
+            {
+                item.Breed = breeds.Where(x => x.Text == item.BreedName).First();
+                item.Gender = genders.Where(x => x.Text == item.GenderName).First();
+                item.Color = colors.Where(x => x.Text == item.ColorName).First();
+                item.User = user;
+            }
 
         }
 
@@ -42,18 +55,16 @@ namespace ChickenManager.Components.Pages.Chicken
             }
         }
 
-        public async Task OpenOrder(EventArgs args)
+        public async Task Edit(Models.Chicken chicken)
         {
-            //await LoadStateAsync();
 
-            Models.Chicken Chicken = new Models.Chicken();
-
-            await DialogService.OpenAsync<AddChicken>("Modify Chicken Name",
-                   new Dictionary<string, object>() { { "ChickenId", ChickenId } },
+            await DialogService.OpenAsync<EditChicken>("Edit Chicken",
+                   new Dictionary<string, object>() { { "Chicken", chicken} },
                    new DialogOptions()
                    {
                        Resizable = false,
                        Draggable = false,
+                       CloseDialogOnOverlayClick = true,
                        //           //Resize = OnResize,
                        //           //Drag = OnDrag,
                        //           //Width = Settings != null ? Settings.Width : "700px",

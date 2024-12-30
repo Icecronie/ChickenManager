@@ -73,5 +73,23 @@ namespace ChickenManager.Repositories
 
             return await _data.SaveData<Chicken, dynamic>(sql, parameters, _config.GetConnectionString("Default"));
         }
+
+        public async Task<int> UpdateChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, Models.Chicken chicken)
+        {
+            string sql = "exec UpdateChicken @name,@breedId,@genderId,@colorId,@age,@layseggs,@chickenId";
+
+            var parameters = new
+            {
+                name = chicken.Name,
+                breedId = chicken.Breed.Id,
+                genderId = chicken.Gender.Id,
+                colorId = chicken.Color.Id,
+                age = chicken.Age,
+                layseggs = chicken.LaysEggs,
+                chickenId= chicken.Id,
+            };
+
+            return await _data.SaveData<Chicken, dynamic>(sql, parameters, _config.GetConnectionString("Default"));
+        }
     }
 }

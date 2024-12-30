@@ -12,5 +12,6 @@ namespace ChickenManager.Repositories
         Task<int> CreateChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, Models.Chicken chicken);
         Task<List<Models.Chicken>> LoadChickens<Chicken>(ISqlDataAccess _data, IConfiguration _config, int userId);
         Task<int> DeleteChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, int chickenId);
+        Task<int> UpdateChicken<Chicken>(ISqlDataAccess _data, IConfiguration _config, Models.Chicken chicken);
     }
 }
